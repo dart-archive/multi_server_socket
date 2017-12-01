@@ -10,13 +10,12 @@ import 'package:async/async.dart';
 import 'src/utils.dart';
 
 /// The error code for an error caused by a port already being in use.
-final _addressInUseErrno = _computeAddressInUseErrno();
-int _computeAddressInUseErrno() {
+final int _addressInUseErrno = () {
   if (Platform.isWindows) return 10048;
   if (Platform.isMacOS) return 48;
   assert(Platform.isLinux);
   return 98;
-}
+}();
 
 /// An implementation of `dart:io`'s [ServerSocket] that wraps multiple servers
 /// and forwards methods to all of them.
@@ -62,8 +61,6 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
   /// A helper method for initializing loopback servers.
   static Future<ServerSocket> _loopback(int port, int remainingRetries,
       int backlog, bool v6Only, bool shared) async {
-    remainingRetries ??= 5;
-
     if (!await supportsIPv4) {
       return await ServerSocket.bind(InternetAddress.LOOPBACK_IP_V6, port,
           backlog: backlog, v6Only: v6Only, shared: shared);
