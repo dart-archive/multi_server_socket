@@ -43,11 +43,11 @@ void main() {
       await multiServer.close();
 
       expect(() => _connect(subServer1),
-          throwsA(new isInstanceOf<SocketException>()));
+          throwsA(new TypeMatcher<SocketException>()));
       expect(() => _connect(subServer2),
-          throwsA(new isInstanceOf<SocketException>()));
+          throwsA(new TypeMatcher<SocketException>()));
       expect(() => _connect(subServer3),
-          throwsA(new isInstanceOf<SocketException>()));
+          throwsA(new TypeMatcher<SocketException>()));
     });
   });
 

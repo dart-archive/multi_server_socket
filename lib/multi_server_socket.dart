@@ -62,11 +62,11 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
   static Future<ServerSocket> _loopback(int port, int remainingRetries,
       int backlog, bool v6Only, bool shared) async {
     if (!await supportsIPv4) {
-      return await ServerSocket.bind(InternetAddress.LOOPBACK_IP_V6, port,
+      return await ServerSocket.bind(InternetAddress.loopbackIPv6, port,
           backlog: backlog, v6Only: v6Only, shared: shared);
     }
 
-    var v4Server = await ServerSocket.bind(InternetAddress.LOOPBACK_IP_V4, port,
+    var v4Server = await ServerSocket.bind(InternetAddress.loopbackIPv4, port,
         backlog: backlog, v6Only: v6Only, shared: shared);
     if (!await supportsIPv6) return v4Server;
 
@@ -74,7 +74,7 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
       // Reuse the IPv4 server's port so that if [port] is 0, both servers use
       // the same ephemeral port.
       var v6Server = await ServerSocket.bind(
-          InternetAddress.LOOPBACK_IP_V6, v4Server.port,
+          InternetAddress.loopbackIPv6, v4Server.port,
           backlog: backlog, v6Only: v6Only, shared: shared);
       return new MultiServerSocket([v4Server, v6Server]);
     } on SocketException catch (error) {

@@ -2,18 +2,13 @@ language: dart
 sudo: false
 
 dart:
-  - stable
   - dev
 
+# TODO: only run dartfmt and dartanalyzer over dev once Dart 2 stable is out
 dart_task:
   - test
   - dartanalyzer
   - dartfmt
-
-matrix:
-  include:
-  - dart: stable
-    dart_task: dartfmt
 
 # Only building master means that we don't run two builds for each pull request.
 branches:
