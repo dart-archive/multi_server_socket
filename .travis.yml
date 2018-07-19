@@ -11,7 +11,7 @@ dart_task:
   - dartfmt
 
 matrix:
-  include:
+  exclude:
   - dart: stable
     dart_task: dartfmt
 
