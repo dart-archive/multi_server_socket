@@ -28,13 +28,13 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
   /// The wrapped servers.
   final Set<ServerSocket> _servers;
 
-  /// Returns the port that one of the wrapped servers is listening on.
+  /// The port that one of the wrapped servers is listening on.
   ///
   /// If the wrapped servers are listening on different ports, it's not defined
   /// which port is returned.
   int get port => _servers.first.port;
 
-  /// Returns the address that one of the wrapped servers is listening on.
+  /// The address that one of the wrapped servers is listening on.
   ///
   /// If the wrapped servers are listening on different addresses, it's not
   /// defined which address is returned.
@@ -58,7 +58,6 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
     return _loopback(port, 5, backlog, v6Only, shared);
   }
 
-  /// A helper method for initializing loopback servers.
   static Future<ServerSocket> _loopback(int port, int remainingRetries,
       int backlog, bool v6Only, bool shared) async {
     if (!await supportsIPv4) {
