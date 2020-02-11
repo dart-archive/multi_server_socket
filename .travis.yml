@@ -1,5 +1,4 @@
 language: dart
-sudo: false
 
 dart:
   - dev
@@ -12,7 +11,7 @@ matrix:
   include:
   - dart: dev
     dart_task: dartfmt
-  - dart: dev:
+  - dart: dev
     dart_task:
       dartanalyzer: --fatal-infos --fatal-warnings .
 
