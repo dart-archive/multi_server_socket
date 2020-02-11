@@ -9,7 +9,7 @@ import 'dart:io';
 final Future<bool> supportsIPv6 = () async {
   try {
     var socket = await ServerSocket.bind(InternetAddress.loopbackIPv6, 0);
-    socket.close();
+    unawaited(socket.close());
     return true;
   } on SocketException catch (_) {
     return false;
@@ -20,9 +20,11 @@ final Future<bool> supportsIPv6 = () async {
 final Future<bool> supportsIPv4 = () async {
   try {
     var socket = await ServerSocket.bind(InternetAddress.loopbackIPv4, 0);
-    socket.close();
+    unawaited(socket.close());
     return true;
   } on SocketException catch (_) {
     return false;
   }
 }();
+
+void unawaited(Future<void> f) {}
