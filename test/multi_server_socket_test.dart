@@ -20,7 +20,7 @@ void main() {
       subServer1 = await ServerSocket.bind("127.0.0.1", 0);
       subServer2 = await ServerSocket.bind("127.0.0.1", 0);
       subServer3 = await ServerSocket.bind("127.0.0.1", 0);
-      multiServer = new MultiServerSocket([subServer1, subServer2, subServer3]);
+      multiServer = MultiServerSocket([subServer1, subServer2, subServer3]);
     });
 
     tearDown(() => multiServer.close());
@@ -42,12 +42,12 @@ void main() {
     test("close closes all servers", () async {
       await multiServer.close();
 
-      expect(() => _connect(subServer1),
-          throwsA(new TypeMatcher<SocketException>()));
-      expect(() => _connect(subServer2),
-          throwsA(new TypeMatcher<SocketException>()));
-      expect(() => _connect(subServer3),
-          throwsA(new TypeMatcher<SocketException>()));
+      expect(
+          () => _connect(subServer1), throwsA(TypeMatcher<SocketException>()));
+      expect(
+          () => _connect(subServer2), throwsA(TypeMatcher<SocketException>()));
+      expect(
+          () => _connect(subServer3), throwsA(TypeMatcher<SocketException>()));
     });
   });
 

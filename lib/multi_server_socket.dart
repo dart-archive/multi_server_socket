@@ -52,7 +52,7 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
   ///
   /// See [ServerSocket.bind].
   static Future<ServerSocket> loopback(int port,
-      {int backlog, bool v6Only: false, bool shared: false}) {
+      {int backlog, bool v6Only = false, bool shared = false}) {
     backlog ??= 0;
 
     return _loopback(port, 5, backlog, v6Only, shared);
@@ -76,7 +76,7 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
       var v6Server = await ServerSocket.bind(
           InternetAddress.loopbackIPv6, v4Server.port,
           backlog: backlog, v6Only: v6Only, shared: shared);
-      return new MultiServerSocket([v4Server, v6Server]);
+      return MultiServerSocket([v4Server, v6Server]);
     } on SocketException catch (error) {
       if (error.osError.errorCode != _addressInUseErrno) rethrow;
       if (port != 0) rethrow;
