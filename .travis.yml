@@ -3,12 +3,18 @@ sudo: false
 
 dart:
   - dev
+  - 2.0.0
 
-# TODO: only run dartfmt and dartanalyzer over dev once Dart 2 stable is out
 dart_task:
   - test
-  - dartanalyzer
-  - dartfmt
+
+matrix:
+  include:
+  - dart: dev
+    dart_task: dartfmt
+  - dart: dev:
+    dart_task:
+      dartanalyzer: --fatal-infos --fatal-warnings .
 
 # Only building master means that we don't run two builds for each pull request.
 branches:
