@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:io';
 
-/// Returns whether this computer supports binding to IPv6 addresses.
+/// Whether this computer supports binding to IPv6 addresses.
 final Future<bool> supportsIPv6 = () async {
   try {
     var socket = await ServerSocket.bind(InternetAddress.loopbackIPv6, 0);
@@ -16,7 +16,7 @@ final Future<bool> supportsIPv6 = () async {
   }
 }();
 
-/// Returns whether this computer supports binding to IPv4 addresses.
+/// Whether this computer supports binding to IPv4 addresses.
 final Future<bool> supportsIPv4 = () async {
   try {
     var socket = await ServerSocket.bind(InternetAddress.loopbackIPv4, 0);
