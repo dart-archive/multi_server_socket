@@ -1,12 +1,11 @@
 name: multi_server_socket
-version: 1.0.2
+version: 1.0.3-dev
 
 description: A dart:io ServerSocket wrapper that listens on multiple ports.
-author: Dart Team <misc@dartlang.org>
-homepage: http://github.com/dart-lang/multi_server_socket
+homepage: https://github.com/dart-lang/multi_server_socket
 
 environment:
-  sdk: '>=2.0.0-dev.54.0 <3.0.0'
+  sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
   async: '>=1.2.0 <3.0.0'
