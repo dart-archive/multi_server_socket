@@ -32,12 +32,14 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
   ///
   /// If the wrapped servers are listening on different ports, it's not defined
   /// which port is returned.
+  @override
   int get port => _servers.first.port;
 
   /// The address that one of the wrapped servers is listening on.
   ///
   /// If the wrapped servers are listening on different addresses, it's not
   /// defined which address is returned.
+  @override
   InternetAddress get address => _servers.first.address;
 
   /// Creates a [MultiServerSocket] wrapping [servers].
@@ -84,12 +86,13 @@ class MultiServerSocket extends StreamView<Socket> implements ServerSocket {
       // A port being available on IPv4 doesn't necessarily mean that the same
       // port is available on IPv6. If it's not (which is rare in practice),
       // we try again until we find one that's available on both.
-      v4Server.close();
+      unawaited(v4Server.close());
       return await _loopback(
           port, remainingRetries - 1, backlog, v6Only, shared);
     }
   }
 
+  @override
   Future<ServerSocket> close() =>
       Future.wait(_servers.map((server) => server.close())).then((_) => this);
 }

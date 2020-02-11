@@ -11,21 +11,21 @@ import 'package:multi_server_socket/src/utils.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group("with multiple ServerSockets", () {
+  group('with multiple ServerSockets', () {
     ServerSocket multiServer;
     ServerSocket subServer1;
     ServerSocket subServer2;
     ServerSocket subServer3;
     setUp(() async {
-      subServer1 = await ServerSocket.bind("127.0.0.1", 0);
-      subServer2 = await ServerSocket.bind("127.0.0.1", 0);
-      subServer3 = await ServerSocket.bind("127.0.0.1", 0);
+      subServer1 = await ServerSocket.bind('127.0.0.1', 0);
+      subServer2 = await ServerSocket.bind('127.0.0.1', 0);
+      subServer3 = await ServerSocket.bind('127.0.0.1', 0);
       multiServer = MultiServerSocket([subServer1, subServer2, subServer3]);
     });
 
     tearDown(() => multiServer.close());
 
-    test("listen listens to all servers", () async {
+    test('listen listens to all servers', () async {
       multiServer.listen((socket) {
         socket.add([1, 2, 3, 4]);
         socket.close();
@@ -39,7 +39,7 @@ void main() {
           (await _connect(subServer3)).first, completion(equals([1, 2, 3, 4])));
     });
 
-    test("close closes all servers", () async {
+    test('close closes all servers', () async {
       await multiServer.close();
 
       expect(
@@ -51,7 +51,7 @@ void main() {
     });
   });
 
-  group("MultiServerSocket.loopback", () {
+  group('MultiServerSocket.loopback', () {
     ServerSocket server;
     setUp(() async {
       server = await MultiServerSocket.loopback(0);
@@ -59,7 +59,7 @@ void main() {
 
     tearDown(() => server.close());
 
-    test("listens on all localhost interfaces", () async {
+    test('listens on all localhost interfaces', () async {
       server.listen((socket) {
         socket.add([1, 2, 3, 4]);
         socket.close();
