@@ -27,4 +27,5 @@ final Future<bool> supportsIPv4 = () async {
   }
 }();
 
+// Avoids a normal dependencies on `package:pedantic`.
 void unawaited(Future<void> f) {}
