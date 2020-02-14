@@ -18,6 +18,6 @@ main() async {
 }
 ```
 
-[ServerSocket]: https://api.dartlang.org/apidocs/channels/stable/dartdoc-viewer/dart-io.ServerSocket
+[ServerSocket]: https://api.dart.dev/stable/dart-io/ServerSocket-class.html
 
-[MultiServerSocket.loopback]: https://www.dartdocs.org/documentation/multi_server_socket/latest/multi_server_socket/MultiServerSocket-class.html
+[MultiServerSocket.loopback]: https://pub.dev/documentation/multi_server_socket/latest/multi_server_socket/MultiServerSocket-class.html
